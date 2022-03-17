@@ -1,12 +1,25 @@
 from flask import Flask
 from flask_restx import Api
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
+db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
+    
+    from config import Config
+    app.config.from_object(Config)
+    db.init_app(app)
+    migrate = Migrate(app, db)
 
     @app.route('/hello')
     def hello():
         return "Goodbye World!"
+    
+    @app.route('/test')
+    def test():
+        return "Goodbye World!vvvv"
 
     from .apis.tweets import api as tweets
     api = Api()

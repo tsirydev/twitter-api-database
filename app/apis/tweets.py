@@ -1,5 +1,4 @@
 from flask_restx import Namespace, Resource, fields
-from app.db import tweet_repository
 from app.models import Tweet
 
 api = Namespace('tweets')  # Base route
